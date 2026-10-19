@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>آزمون قطعه‌شناسی موبایل</title>
+<style>
+:root{--bg:#0a0f1f;--card:#121a33;--txt:#e8f0ff;--pri:#39ff88;--ac:#00d4ff;--line:#26335e;--code:#060a15;--mut:#8ea0cf;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#eef3ff;--card:#fff;--txt:#14204a;--pri:#0a9d4f;--line:#c9d5f5;--code:#101b3d;--mut:#51608f}}
+:root[data-theme="light"]{--bg:#eef3ff;--card:#fff;--txt:#14204a;--pri:#0a9d4f;--line:#c9d5f5;--code:#101b3d;--mut:#51608f}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--txt);font-family:Tahoma,"Segoe UI",Arial,sans-serif;min-height:100%;overflow-x:hidden;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:34px 34px;background-attachment:fixed}
+main{max-width:600px;margin:0 auto;padding:14px}
+.hud{display:flex;justify-content:space-between;gap:6px;font-weight:bold;font-size:15px;flex-wrap:wrap}
+.chip{background:var(--card);border:2px solid var(--ac);border-radius:14px;padding:5px 11px;box-shadow:0 0 12px color-mix(in srgb,var(--ac) 40%,transparent)}
+.path{display:flex;gap:3px;margin:12px 0 8px}
+.path i{flex:1;height:10px;border-radius:6px;background:var(--line)}
+.path i.on{background:var(--pri)}.path i.no{background:#ff5470}.path i.cur{background:var(--ac);animation:pulse 1s infinite}
+@keyframes pulse{50%{transform:scaleY(1.8)}}
+.tm{height:12px;background:var(--line);border-radius:8px;overflow:hidden;margin-bottom:12px}
+.tm b{display:block;height:100%;width:100%;background:linear-gradient(90deg,var(--pri),#ffd23f,#ff5470)}
+.card{background:var(--card);border:2px solid var(--ac);border-radius:20px;padding:18px;margin-bottom:12px;box-shadow:0 0 22px color-mix(in srgb,var(--ac) 35%,transparent);animation:pop .35s}
+@keyframes pop{from{transform:scale(.92);opacity:0}}
+.shake{animation:sh .4s}@keyframes sh{25%{transform:translateX(-10px)}75%{transform:translateX(10px)}}
+.tag{display:inline-block;background:var(--ac);color:#04101f;font-weight:bold;font-size:13px;border-radius:10px;padding:2px 10px;margin-bottom:8px}
+.q{font-size:19px;line-height:1.9;font-weight:bold}
+pre{direction:ltr;text-align:left;background:var(--code);color:#9dffc4;border:1px solid var(--line);border-radius:12px;padding:12px;margin:10px 0;font:15px/1.7 Consolas,"Courier New",monospace;overflow-x:auto;white-space:pre}
+button,input{font:inherit}
+.opt{display:block;width:100%;text-align:start;background:var(--card);color:var(--txt);border:2px solid var(--line);border-radius:14px;padding:12px 14px;margin:9px 0;font-size:17px;font-weight:bold;cursor:pointer;transition:.15s}
+.opt:hover:not(:disabled){border-color:var(--ac);transform:translateX(-4px)}
+.opt span{display:block;unicode-bidi:plaintext}
+.opt:disabled{cursor:default;opacity:.55}.opt.ok{opacity:1;border-color:var(--pri);background:color-mix(in srgb,var(--pri) 22%,var(--card))}.opt.bad{opacity:1;border-color:#ff5470;background:color-mix(in srgb,#ff5470 22%,var(--card))}.opt.gone{visibility:hidden}
+.go{width:100%;background:var(--pri);color:#04140a;border:0;border-radius:16px;padding:14px;font-size:19px;font-weight:bold;cursor:pointer;box-shadow:0 5px 0 rgba(0,0,0,.35)}
+.go:active{transform:translateY(3px);box-shadow:0 2px 0 rgba(0,0,0,.35)}
+.go.alt{background:var(--ac)}
+.ll{display:flex;gap:8px;margin-bottom:10px}
+.ll button{flex:1;background:var(--card);color:var(--txt);border:2px dashed var(--ac);border-radius:12px;padding:8px;font-weight:bold;cursor:pointer}
+.ll button:disabled{opacity:.4;cursor:default}
+input{width:100%;padding:13px;border-radius:12px;border:2px solid var(--line);background:var(--code);color:#fff;font-size:18px;margin:12px 0}
+.fb{margin-top:10px;line-height:1.9;font-weight:bold}
+textarea{width:100%;height:90px;border-radius:12px;border:2px dashed var(--pri);background:var(--code);color:#9dffc4;padding:10px;font:inherit;font-size:15px}
+.hide{display:none}
+h1{font-size:30px;text-align:center;margin:4px 0;color:var(--pri);text-shadow:0 0 14px var(--pri)}
+.big{font-size:80px;text-align:center}.snake{font-size:64px;text-align:center;animation:bob 1.2s infinite alternate}
+@keyframes bob{to{transform:translateY(-10px) rotate(8deg)}}
+.fx{position:fixed;top:-40px;font-size:26px;pointer-events:none;z-index:9;animation:fall 1.8s linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(540deg)}}
+.gr{text-align:center;margin:10px 0}.gr svg{width:190px;max-width:65%;height:auto;background:#1b6b4a;border-radius:14px;padding:8px;border:2px solid var(--line)}
+</style>
+</head>
+<body>
+<main id="app"></main>
+<script>
+var EX,Q=[];
+function m(t,q,o,e,c,g){return{t:t,q:q,o:o,a:0,e:e,c:c,g:g}}
+var T1='قطعه‌شناسی',T2='شماتیک',T3='عیب‌یابی';
+var EXAMS=[
+{n:'آزمون ۱ | قطعه‌شناسی مقدماتی 🔩',q:[
+m(T1,'واحد اندازه‌گیری مقاومت کدام است؟ 🔌',['اهم (Ω)','فاراد (F)','هانری (H)','آمپر (A)'],'مقاومت را با اهم می‌سنجند.'),
+m(T1,'ظرفیت خازن با کدام واحد بیان می‌شود؟',['فاراد (µF / nF / pF)','اهم','ولت','وات'],'ظرفیت خازن با فاراد و زیرمجموعه‌هایش بیان می‌شود.'),
+m(T1,'در شماتیک حرف L معمولاً نشان‌دهنده‌ی چیست؟',['سلف (Inductor)','مقاومت','خازن','فیوز'],'L یعنی سلف و واحدش هانری است.'),
+m(T1,'دیود جریان را در چند جهت عبور می‌دهد؟',['فقط یک جهت','هر دو جهت','هیچ جهت','بستگی به رنگش دارد'],'دیود جریان را از آند به کاتد عبور می‌دهد.'),
+m(T1,'پایه‌های ماسفت (MOSFET) کدامند؟',['Gate، Drain، Source','Base، Collector، Emitter','Anode، Cathode، Gate','Input، Output، Ground'],'ماسفت: گیت، درین و سورس.'),
+m(T1,'پایه‌های ترانزیستور BJT کدامند؟',['Base، Collector، Emitter','Gate، Drain، Source','Vcc، Vss، Out','Tx، Rx، Clk'],'BJT: بیس، کلکتور و امیتر.'),
+m(T1,'خازن سرامیکی SMD معمولی قطبیت دارد؟',['نه، دو پایه‌اش یکسان است','بله، مثبت و منفی دارد','فقط وقتی قهوه‌ای باشد','فقط در گوشی‌های قدیمی'],'سرامیکی‌ها بی‌قطبیت‌اند؛ تانتالیوم و الکترولیتی قطبیت دارند.'),
+m(T1,'نوار روی بدنه‌ی خازن تانتالیوم SMD نشان‌دهنده‌ی کدام پایه است؟',['پایه‌ی مثبت','پایه‌ی منفی','ظرفیت','ولتاژ'],'در تانتالیوم نوار کنار پایه‌ی مثبت است (برعکس دیود).'),
+m(T1,'کریستال (X) در برد گوشی چه می‌کند؟ ⏱️',['فرکانس کلاک دقیق تولید می‌کند','ولتاژ را تثبیت می‌کند','باتری را شارژ می‌کند','صدا را تقویت می‌کند'],'کریستال کلاک پایدار برای آی‌سی‌ها می‌سازد.'),
+m(T1,'فیوز (F) چه وظیفه‌ای دارد؟',['با جریان بیش از حد مسیر را قطع می‌کند','انرژی ذخیره می‌کند','کلاک می‌سازد','ولتاژ را بالا می‌برد'],'فیوز از مدار در برابر جریان زیاد محافظت می‌کند.'),
+m(T1,'مقاومت SMD با کد 103 چند اهم است؟',['10 کیلو اهم','103 اهم','1 کیلو اهم','100 کیلو اهم'],'10 و سه صفر = 10000 اهم.'),
+m(T1,'کد 102 روی مقاومت SMD یعنی؟',['1 کیلو اهم','10 کیلو اهم','102 اهم','100 اهم'],'10 و دو صفر = 1000 اهم.'),
+m(T1,'مقاومت SMD با کد 000 چیست؟',['مقاومت صفر اهم (جامپر)','مقاومت بی‌نهایت','خازن','قطعه‌ی خراب'],'کد 000 یعنی جامپر با مقاومت تقریباً صفر.'),
+m(T1,'آی‌سی پاور (PMIC) چه می‌کند؟ ⚡',['ولتاژهای مورد نیاز بخش‌ها را تولید و مدیریت می‌کند','فقط صدا پخش می‌کند','تصویر نمایش می‌دهد','سیگنال آنتن می‌گیرد'],'PMIC ریل‌های تغذیه‌ی گوشی را می‌سازد.'),
+m(T1,'آی‌سی شارژ چه وظیفه‌ای دارد؟ 🔋',['کنترل ورود جریان و شارژ باتری','ذخیره‌ی عکس‌ها','پردازش بازی','تولید کلاک'],'آی‌سی شارژ شارژ باتری را کنترل می‌کند.'),
+m(T1,'eMMC یا UFS چیست؟',['حافظه‌ی داخلی ذخیره‌سازی','پردازنده','آی‌سی شارژ','آی‌سی صدا'],'اطلاعات و سیستم‌عامل در آن ذخیره می‌شود.'),
+m(T1,'SoC یا CPU چیست؟ 🧠',['مغز پردازشی گوشی','باتری','میکروفون','آنتن'],'SoC پردازنده و چند بخش دیگر را در یک چیپ دارد.'),
+m(T1,'دیود TVS یا ESD روی خطوط ورودی چه می‌کند؟',['از پالس و ولتاژ ناگهانی محافظت می‌کند','سیگنال را تقویت می‌کند','داده ذخیره می‌کند','کلاک می‌سازد'],'TVS پالس‌های خطرناک را به زمین می‌فرستد.'),
+m(T1,'LED چگونه کار می‌کند؟ 💡',['با عبور جریان از آند به کاتد نور می‌دهد','با نور جریان ذخیره می‌کند','ولتاژ را دو برابر می‌کند','فرکانس تولید می‌کند'],'LED یک دیود نورانی است.'),
+m(T1,'سلف‌ها در بخش تغذیه معمولاً کنار کدام قطعه دیده می‌شوند؟',['PMIC و آی‌سی‌های تغذیه','حافظه‌ی eMMC','دوربین','سنسور نور'],'سلف همراه آی‌سی تغذیه مبدل‌های باک و بوست را می‌سازد.')]},
+{n:'آزمون ۲ | شماتیک و نقشه‌خوانی 📐',q:[
+m(T2,'شماتیک چیست؟',['نقشه‌ی اتصالات الکتریکی قطعات','عکس واقعی برد','لیست قیمت قطعات','نقشه‌ی بدنه‌ی گوشی'],'شماتیک نشان می‌دهد قطعات چگونه به هم وصل‌اند.'),
+m(T2,'بردویو (Boardview) چه چیزی نشان می‌دهد؟',['محل فیزیکی قطعات و نت‌ها روی برد','فقط رنگ برد','قیمت قطعات','وضعیت باتری'],'بردویو جای دقیق قطعات را روی برد نشان می‌دهد.'),
+m(T2,'GND یعنی؟',['زمین؛ مرجع صفر ولت','ورودی شارژ','خروجی صدا','کلاک'],'GND مرجع ولتاژ در برد است.'),
+m(T2,'VBAT معمولاً چه ولتاژی دارد؟ 🔋',['ولتاژ باتری، حدود ۳ تا ۴.۴ ولت','۱۲۰ ولت','صفر ولت','۴۰ ولت'],'باتری لیتیومی گوشی تقریباً ۳ تا ۴.۴ ولت دارد.'),
+m(T2,'برچسب U2000 روی برد معمولاً چیست؟',['آی‌سی','مقاومت','خازن','فیوز'],'U حرف اول Unit و نشانه‌ی آی‌سی است.'),
+m(T2,'حرف Q در شماتیک معمولاً چیست؟',['ترانزیستور یا ماسفت','سلف','کریستال','کانکتور'],'Q برای ترانزیستورها به کار می‌رود.'),
+m(T2,'TP در شماتیک یعنی؟',['Test Point؛ نقطه‌ی تست','Top Power','Time Pulse','Touch Panel'],'TP نقطه‌ای برای اندازه‌گیری است.'),
+m(T2,'NC کنار یک پایه یعنی؟',['No Connect؛ به جایی وصل نیست','Normal Current','New Circuit','Negative Charge'],'پایه‌ی NC استفاده نشده است.'),
+m(T2,'دو نت با نام یکسان در دو صفحه‌ی شماتیک، بدون سیم بین‌شان چه وضعی دارند؟',['به هم وصل‌اند','جدا هستند','فقط هنگام روشن بودن وصل‌اند','اتصال کوتاه هستند'],'نام نت یکسان یعنی اتصال الکتریکی یکسان.'),
+m(T2,'سیگنالی مثل RESET_N با پسوند N یعنی؟',['Active Low؛ با صفر ولت فعال می‌شود','با ولتاژ بالا فعال می‌شود','همیشه خاموش است','سیم ندارد'],'N یا خط بالای نام یعنی فعال در سطح پایین.'),
+m(T2,'خطوط I2C کدامند؟',['SDA و SCL','TX و RX','D+ و D-','VCC و GND'],'I2C دو خط داده و کلاک دارد.'),
+m(T2,'خطوط UART کدامند؟',['TX و RX','SDA و SCL','D+ و D-','EN و NC'],'UART با ارسال و دریافت کار می‌کند.'),
+m(T2,'پایه‌ی EN یا Enable چه می‌کند؟',['با سیگنال آن، آی‌سی یا بلوک فعال می‌شود','ولتاژ ورودی است','به زمین وصل می‌شود','فقط برای تست است'],'EN فرمان روشن شدن بلوک را می‌دهد.'),
+m(T2,'مقاومت پول‌آپ (Pull-up) چه می‌کند؟',['سیگنال را به ولتاژ بالا وصل نگه می‌دارد','سیگنال را به زمین می‌برد','کلاک می‌سازد','جریان را قطع می‌کند'],'پول‌آپ حالت پیش‌فرض خط را High می‌کند.'),
+m(T2,'ولتاژ VOUT در این مدار چقدر است؟ 🧮',['1.8V','3.6V','0V','7.2V'],'دو مقاومت برابر ولتاژ را نصف می‌کنند.','VIN = 3.6V\n  |\n[R1 10k]\n  |----> VOUT\n[R2 10k]\n  |\n GND'),
+m(T2,'مقاومت معادل بین A و B چند است؟',['3k','2k','0.67k','1k'],'در حالت سری مقاومت‌ها جمع می‌شوند: 1k + 2k = 3k.','A --[R1 1k]--[R2 2k]-- B'),
+m(T2,'مقاومت معادل بین A و B چند است؟',['5k','20k','10k','0'],'دو مقاومت برابر موازی، نصف می‌شوند.','   +-[R1 10k]-+\nA -+           +- B\n   +-[R2 10k]-+'),
+m(T2,'جریان عادی از کدام سمت دیود می‌گذرد؟',['از A (آند) به K (کاتد)','از K به A','از هر دو طرف','از هیچ طرف'],'پیکان نماد دیود جهت عبور جریان را نشان می‌دهد.','A ---|>|--- K'),
+m(T2,'کانکتورهای J، CN و BTB در شماتیک چه کاری دارند؟',['اتصال قطعات خارجی مثل LCD، باتری و فلت','پردازش داده','فیلتر کردن ولتاژ','تولید کلاک'],'کانکتور برد را به قطعات دیگر وصل می‌کند.'),
+m(T2,'ترتیب منطقی روشن شدن گوشی کدام است? 🚀',['باتری ← PMIC ← ولتاژهای تغذیه ← CPU','CPU ← باتری ← PMIC','LCD ← CPU ← باتری','صدا ← شارژ ← باتری'],'اول تغذیه‌ها ساخته می‌شوند و بعد CPU بوت می‌شود.')]},
+{n:'آزمون ۳ | ابزار و عیب‌یابی 🛠️',q:[
+m(T3,'حالت دیود مولتی‌متر برای چیست؟',['تست دیود و بررسی اتصال کوتاه روی خطوط','اندازه‌گیری دما','اندازه‌گیری فرکانس شبکه','تست باتری'],'حالت دیود افت ولتاژ را می‌سنجد و برای تست خطوط مفید است.'),
+m(T3,'حالت بیپ (Continuity) چه چیزی را نشان می‌دهد؟',['وجود اتصال بین دو نقطه','ولتاژ باتری','ظرفیت خازن','دمای قطعه'],'بیپ یعنی دو نقطه اتصال دارند.'),
+m(T3,'منبع تغذیه‌ی DC (Power Supply) در تعمیرات چه کاربردی دارد؟',['تأمین ولتاژ و دیدن مصرف جریان برد','تمیز کردن برد','لحیم کردن','باز کردن قاب'],'با آن مصرف جریان گوشی را زیر نظر می‌گیریم.'),
+m(T3,'گوشی روی منبع تغذیه جریان زیاد می‌کشد ولی روشن نمی‌شود؛ احتمال چیست؟',['اتصال کوتاه روی یکی از خطوط','باتری پر است','اپ خراب است','قاب شل است'],'جریان بالا معمولاً نشانه‌ی اتصال کوتاه است.'),
+m(T3,'اولین کار قبل از هر تعمیر روی برد؟ 🔋',['جدا کردن باتری','وصل کردن شارژر','فشردن دکمه‌ی روشن','ریختن فلاکس'],'اول باتری را جدا می‌کنیم تا برد برق نداشته باشد.'),
+m(T3,'فلاکس چه کاری می‌کند؟',['کمک به جاری شدن لحیم و پاک کردن اکسید','برد را سرد می‌کند','ولتاژ تولید می‌کند','برد را رنگ می‌کند'],'فلاکس لحیم‌کاری را تمیزتر و ساده‌تر می‌کند.'),
+m(T3,'هیترِ خیلی داغ و باد خیلی زیاد چه خطری دارد؟ 🔥',['جابه‌جا یا سوختن قطعات اطراف','هیچ خطری ندارد','برد سریع‌تر خنک می‌شود','لحیم قوی‌تر می‌شود'],'برای قطعات ریز باید دما و باد را مناسب انتخاب کرد.'),
+m(T3,'برای جلوگیری از ESD هنگام کار با برد چه باید کرد؟',['استفاده از مچ‌بند آنتی‌استاتیک','کار روی فرش','پوشیدن لباس پشمی','کار روی پلاستیک'],'تخلیه‌ی الکتریسیته‌ی ساکن می‌تواند آی‌سی‌ها را خراب کند.'),
+m(T3,'ولت‌متر چگونه به مدار وصل می‌شود؟',['موازی با قطعه','سری با قطعه','فقط به زمین','هیچ‌کدام'],'ولتاژ بین دو نقطه اندازه‌گیری می‌شود.'),
+m(T3,'آمپرمتر چگونه به مدار وصل می‌شود؟',['سری با مسیر جریان','موازی با قطعه','فقط روی باتری','روی GND'],'جریان باید از داخل آمپرمتر عبور کند.'),
+m(T3,'مقاومت یک قطعه را روی برد چگونه اندازه می‌گیریم؟',['برد خاموش و باتری جدا','برد روشن','با شارژر وصل','در حین بازی'],'با برد روشن اندازه‌گیری مقاومت نادرست است و ممکن است مولتی‌متر آسیب ببیند.'),
+m(T3,'گوشی خیس شده؛ اولین اقدام درست کدام است؟ 💧',['خاموش کردن و جدا کردن باتری','وصل کردن شارژر','خشک کردن با سشوار داغ','روشن کردن چند بار'],'برق‌دار بودن برد باعث خوردگی سریع می‌شود.'),
+m(T3,'برای تمیز کردن برد معمولاً از چه ماده‌ای استفاده می‌کنیم؟',['ایزوپروپیل الکل (IPA) با خلوص بالا','آب شیر','سرکه','گازوئیل'],'IPA سریع خشک می‌شود و بقایا را پاک می‌کند.'),
+m(T3,'نمایشگر خط‌خطی شده؛ اول چه چیزی را بررسی می‌کنیم؟',['کانکتور و فلت LCD و خود نمایشگر','آنتن','اسپیکر','دکمه‌ی صدا'],'ابتدا ساده‌ترین موارد یعنی اتصال و قطعه‌ی نمایشگر را می‌سنجیم.'),
+m(T3,'میکروسکوپ در تعمیرات چه کاربردی دارد؟ 🔬',['دیدن قطعات ریز و لحیم‌ها','شارژ باتری','اندازه‌گیری ولتاژ','تولید گرما'],'قطعات SMD بسیار ریزند و دیدنشان کار دقیقی می‌خواهد.'),
+m(T3,'در تست دیودی روی یک خازن، عدد نزدیک صفر و بیپ ممتد یعنی؟',['خازن احتمالاً اتصال کوتاه است','خازن سالم است','خازن شارژ شده','خازن نو است'],'خازن سالم نباید روی خط تغذیه اتصال کوتاه نشان دهد.'),
+m(T3,'گوشی بعد از وصل شارژر اصلاً جریان نمی‌کشد؛ اولین مظنون‌ها؟',['کانکتور شارژ، کابل و آی‌سی شارژ','پنل لمسی','دوربین','اسپیکر'],'اول مسیر ورودی شارژ را کنترل می‌کنیم.'),
+m(T3,'در روش تزریق ولتاژ برای یافتن اتصال کوتاه، چه باید کرد؟',['ولتاژ پایین با جریان محدود وصل و گرم شدن قطعه را دنبال کنیم','ولتاژ بالا و جریان نامحدود بدهیم','فقط قطعات را عوض کنیم','باتری وصل کنیم'],'ولتاژ کم و جریان محدود از سوختن برد جلوگیری می‌کند.'),
+m(T3,'اگر باتری با ولتاژ پایین‌تر از حد مجاز باشد، چه کار درستی است؟',['با منبع یا روش ایمن بررسی و در صورت خرابی باتری عوض شود','با شارژر سریع خیلی‌زیاد شارژ شود','سوراخ شود','گرم شود'],'باتری‌های لیتیومی خراب خطرناک‌اند و باید ایمن با آن‌ها رفتار کرد.'),
+m(T3,'پس از تعویض یک قطعه، چه کاری مهم است؟ ✅',['تمیز کردن، بررسی اتصال کوتاه و سپس تست روی منبع تغذیه','بستن فوری قاب','وصل کردن شارژر بدون تست','فقط عکس گرفتن'],'قبل از روشن کردن کامل باید اطمینان از نبود اتصال کوتاه داشت.')]},
+{n:'آزمون ۴ | تشخیص قطعه از روی شکل 🖼️',q:[
+p('res103','این قطعه‌ی مشکی با عدد روی بدنه چیست؟ 🔍',['مقاومت SMD','خازن سرامیکی','دیود','فیوز'],'بدنه‌ی مشکی با کد عددی روی آن مقاومت است.'),
+p('res472','کد 472 روی این مقاومت چند اهم است؟',['4.7 کیلو اهم','472 اهم','47 کیلو اهم','47 اهم'],'47 و دو صفر = 4700 اهم.'),
+p('cap','این قطعه‌ی قهوه‌ای بدون نوشته که روی خطوط تغذیه زیاد دیده می‌شود چیست؟',['خازن سرامیکی SMD','مقاومت','دیود','سلف'],'خازن‌های سرامیکی معمولاً قهوه‌ای یا زرد روشن و بدون کد هستند.'),
+p('tant','این قطعه‌ی زرد/نارنجی با نوار کنار یک سر چیست؟',['خازن تانتالیوم','فیوز','LED','مقاومت'],'تانتالیوم رنگ زرد دارد و نوار پایه‌ی مثبت را نشان می‌دهد.'),
+p('tant','خازن تانتالیوم را با چه ویژگی از سرامیکی تشخیص می‌دهیم؟',['رنگ زرد/نارنجی و نوار قطبیت','کوچک‌تر بودن','داشتن پایه‌ی سیمی','نقره‌ای بودن'],'نوار قطبیت و رنگ زرد از نشانه‌های تانتالیوم است.'),
+p('ind','این قطعه‌ی مربعی با نوشته‌ی 2R2 چیست؟',['سلف SMD (حدود 2.2 میکروهانری)','مقاومت 2.2 اهم','خازن','آی‌سی'],'در کد سلف R نقطه‌ی اعشار است: 2R2 یعنی 2.2.'),
+p('diode','نوار سفید روی این دیود کدام پایه را نشان می‌دهد؟',['کاتد (K)','آند (A)','Gate','زمین'],'نوار معمولاً سمت کاتد است.'),
+p('sot','این قطعه‌ی سه‌پایه معمولاً چیست؟',['ترانزیستور یا ماسفت (SOT-23)','فیوز','کریستال','کانکتور'],'پکیج سه‌پایه‌ی کوچک SOT-23 برای ترانزیستور و ماسفت رایج است.'),
+p('ic','این چیپ با پایه‌های کناری چیست؟',['آی‌سی','مقاومت','LED','سلف'],'چیپ مستطیلی با پایه‌های اطراف آی‌سی است.'),
+p('ic','نقطه‌ی گوشه‌ی این چیپ چیست؟',['نشانه‌ی پین شماره ۱','نشانه‌ی خرابی','نقطه‌ی تست ولتاژ','لوگوی کارخانه'],'نقطه‌ی گوشه محل پین ۱ را نشان می‌دهد.'),
+p('bga','توپ‌های لحیم زیر این چیپ مربوط به کدام پکیج است؟',['BGA','SOIC','SOT-23','DIP'],'BGA یعنی آرایه‌ی توپ‌های لحیم زیر چیپ؛ مثل CPU و eMMC.'),
+p('xtal','این قطعه‌ی فلزی نقره‌ای با نوشته‌ی 26.000 چیست؟ ⏱️',['کریستال (کلاک)','فیوز','مقاومت','خازن تانتالیوم'],'عدد فرکانس کریستال بر حسب مگاهرتز است.'),
+p('fuse','این قطعه‌ی روشن با رشته‌ی نازک داخلش چیست؟',['فیوز SMD','LED','مقاومت','دیود'],'رشته‌ی نازک داخل فیوز با جریان زیاد می‌سوزد.'),
+p('led','این قطعه‌ی روشن که با جریان نور می‌دهد چیست؟ 💡',['LED SMD','فیوز','خازن','سلف'],'LED یک دیود نورانی است.'),
+p('btb','ردیف پین‌های ریز روی این قطعه مربوط به چیست؟',['کانکتور BTB (نمایشگر، باتری یا فلت)','مقاومت','آی‌سی پاور','کریستال'],'کانکتور برد را به قطعات دیگر وصل می‌کند.'),
+p('sres','این نماد در شماتیک چیست؟',['مقاومت','خازن','سلف','دیود'],'زیگزاگ نماد مقاومت است.'),
+p('scap','این نماد در شماتیک چیست؟',['خازن','مقاومت','سلف','زمین'],'دو خط موازی نماد خازن است.'),
+p('sind','این نماد در شماتیک چیست؟',['سلف','مقاومت','خازن','فیوز'],'حلقه‌ها نماد سلف هستند.'),
+p('sdio','این نماد در شماتیک چیست؟',['دیود','مقاومت','خازن','ترانزیستور'],'مثلث با خط عمودی نماد دیود است.'),
+p('sgnd','این نماد در شماتیک چیست؟',['زمین (GND)','باتری','مقاومت','آنتن'],'سه خط کوتاه‌شونده نماد زمین است.')]}
+];
+function p(g,q,o,e){return m('تشخیص از شکل',q,o,e,null,g)}
+var S=function(b,st){return'<svg viewBox="0 0 100 70"'+(st?' style="'+st+'"':'')+'>'+b+'</svg>'},
+PD=function(x,y,w,h){return'<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" fill="#d9b44a"/>'},
+RC=function(x,y,w,h,f,r){return'<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" rx="'+(r||2)+'" fill="'+f+'"/>'},
+TX=function(x,y,t,z,f){return'<text x="'+x+'" y="'+y+'" font-size="'+z+'" fill="'+f+'" text-anchor="middle" font-family="monospace" font-weight="bold">'+t+'</text>'},
+SY=function(d){return S('<path d="'+d+'" stroke="#fff" fill="none" stroke-width="3" stroke-linejoin="round"/>','background:#0e1a33')},
+SM=function(c,t,e){return S(PD(8,20,18,30)+PD(74,20,18,30)+RC(20,20,60,30,c)+RC(20,20,8,30,'#ccc')+RC(72,20,8,30,'#ccc')+(t?TX(50,41,t,15,'#fff'):'')+(e||''))},
+PN=function(n,f){var b='';for(var k=0;k<n;k++)b+=f(k);return b};
+var G={res103:SM('#222','103'),res472:SM('#222','472'),cap:SM('#b5835a'),
+tant:S(PD(8,20,18,30)+PD(74,20,18,30)+RC(20,20,60,30,'#e0a020')+RC(20,20,10,30,'#8a5a00')),
+ind:S(PD(10,10,15,50)+PD(75,10,15,50)+RC(22,10,56,50,'#333',4)+TX(50,41,'2R2',15,'#fff')),
+diode:S(PD(8,20,18,30)+PD(74,20,18,30)+RC(20,20,60,30,'#222')+RC(66,20,7,30,'#eee')),
+sot:S(PD(33,48,10,12)+PD(57,48,10,12)+PD(45,10,10,12)+RC(30,22,40,26,'#222')),
+ic:S(PN(5,function(k){return RC(14,14+k*10,12,5,'#bbb',1)+RC(74,14+k*10,12,5,'#bbb',1)})+RC(24,8,52,54,'#222',3)+'<circle cx="33" cy="17" r="3" fill="#aaa"/>'+TX(50,40,'IC',14,'#888')),
+bga:S(RC(18,6,64,58,'#444',3)+PN(30,function(k){return'<circle cx="'+(28+(k%6)*9)+'" cy="'+(16+Math.floor(k/6)*9)+'" r="3.5" fill="#ddd"/>'})),
+xtal:S(RC(22,18,56,34,'#c8c8c8',3)+RC(22,44,10,8,'#555')+RC(68,18,10,8,'#555')+TX(50,38,'26.000',12,'#333')),
+fuse:S(PD(8,20,18,30)+PD(74,20,18,30)+RC(20,20,60,30,'#e8e8d8')+RC(20,20,8,30,'#ccc')+RC(72,20,8,30,'#ccc')+'<path d="M28 35H72" stroke="#555" stroke-width="2"/>'),
+led:S(PD(8,20,18,30)+PD(74,20,18,30)+RC(26,20,48,30,'#f4f4d0')+'<circle cx="50" cy="35" r="9" fill="#ffd23f"/>'+RC(26,20,6,6,'#2a9d4f')),
+btb:S(RC(8,22,84,26,'#222',3)+PN(12,function(k){return RC(13+k*6.2,28,3.4,14,'#d9b44a',0.5)})),
+sres:SY('M5 35H25L30 20L40 50L50 20L60 50L70 20L75 35H95'),
+scap:SY('M5 35H42M42 15V55M58 15V55M58 35H95'),
+sind:SY('M5 35H20A10 10 0 0 1 40 35A10 10 0 0 1 60 35A10 10 0 0 1 80 35H95'),
+sdio:SY('M5 35H35M35 15V55L65 35ZM65 15V55M65 35H95'),
+sgnd:SY('M50 8V35M25 35H75M35 47H65M43 59H57')};
+var app=document.getElementById('app'),name='',i=0,score=0,combo=0,best=0,right=0,wrong=[],res=[],locked=false,tl,ti,TMAX=40,l5=true,lt=true;
+var fa=function(n){return String(n).replace(/\d/g,function(d){return '۰۱۲۳۴۵۶۷۸۹'[d]})};
+var esc=function(s){return s.replace(/[&<>"']/g,function(c){return '&#'+c.charCodeAt(0)+';'})};
+var AC;function snd(f,d,t){try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();var o=AC.createOscillator(),g=AC.createGain();o.type=t||'square';o.frequency.value=f;g.gain.value=.05;o.connect(g);g.connect(AC.destination);o.start();o.stop(AC.currentTime+d)}catch(e){}}
+function ok(){snd(660,.1);setTimeout(function(){snd(880,.15)},100)}
+function no(){snd(180,.3,'sawtooth')}
+function fx(list,n){for(var k=0;k<n;k++){var s=document.createElement('span');s.className='fx';s.textContent=list[k%list.length];s.style.left=Math.random()*95+'vw';s.style.animationDelay=Math.random()*.5+'s';document.body.appendChild(s);setTimeout(function(x){x.remove()},2600,s)}}
+function shuf(a){for(var k=a.length-1;k>0;k--){var j=Math.floor(Math.random()*(k+1)),t=a[k];a[k]=a[j];a[j]=t}return a}
+function start(){
+ var h='<div class="card"><div class="snake">📱</div><h1>آزمون قطعه‌شناسی موبایل</h1><p style="text-align:center;font-size:17px;line-height:1.9">هر آزمون ۲۰ سؤال دارد ⚡ سریع‌تر = امتیاز بیشتر<br>جواب‌های درست پشت‌سرهم = کمبو 🔥<br>دو کمک داری: ۵۰/۵۰ و ۱۰+ ثانیه</p><input id="nm" dir="auto" placeholder="اسم هنرجو را بنویس" maxlength="30" value="'+esc(name)+'">';
+ EXAMS.forEach(function(e,k){h+='<button class="go'+(k%2?' alt':'')+'" style="margin-bottom:10px" data-e="'+k+'">'+e.n+'</button>'});
+ app.innerHTML=h+'</div>';
+ app.querySelectorAll('[data-e]').forEach(function(b){b.onclick=function(){var v=document.getElementById('nm').value.trim();if(!v){document.getElementById('nm').focus();return}name=v;EX=EXAMS[+b.dataset.e];Q=EX.q;i=0;score=0;combo=0;best=0;right=0;wrong=[];res=[];l5=true;lt=true;snd(520,.1);show()}});
+}
+function show(){
+ locked=false;var d=Q[i];
+ var opts=d.o.map(function(t,k){return{t:t,k:k}});shuf(opts);
+ var p='';for(var k=0;k<Q.length;k++)p+='<i class="'+(k<i?(res[k]?'on':'no'):k==i?'cur':'')+'"></i>';
+ var h='<div class="hud"><span class="chip">⭐ '+fa(score)+'</span><span class="chip" id="cb">🔥 کمبو '+fa(combo)+'</span><span class="chip" id="tx"></span></div><div class="path">'+p+'</div><div class="tm"><b id="tb"></b></div><div class="ll"><button id="l1">✂️ ۵۰/۵۰</button><button id="l2">⏳ ۱۰+ ثانیه</button></div><div class="card" id="cd"><span class="tag">'+d.t+' | سؤال '+fa(i+1)+' از '+fa(Q.length)+'</span><div class="q">'+d.q+'</div>';if(d.g)h+='<div class="gr">'+G[d.g]+'</div>';
+ if(d.c)h+='<pre id="code"></pre>';
+ opts.forEach(function(o){h+='<button class="opt" data-k="'+o.k+'"><span>'+esc(o.t)+'</span></button>'});
+ h+='<div class="fb" id="fb"></div></div><button class="go hide" id="nx"></button>';
+ app.innerHTML=h;
+ if(d.c)document.getElementById('code').textContent=d.c;
+ app.querySelectorAll('.opt').forEach(function(b){b.onclick=function(){pick(+b.dataset.k,b)}});
+ var b1=document.getElementById('l1'),b2=document.getElementById('l2');b1.disabled=!l5;b2.disabled=!lt;
+ b1.onclick=function(){if(locked||!l5)return;l5=false;b1.disabled=true;var w=[].slice.call(app.querySelectorAll('.opt')).filter(function(x){return +x.dataset.k!==d.a});shuf(w).slice(0,2).forEach(function(x){x.classList.add('gone');x.disabled=true});snd(400,.1)};
+ b2.onclick=function(){if(locked||!lt)return;lt=false;b2.disabled=true;tl=Math.min(tl+10,TMAX+10);snd(500,.1)};
+ tl=TMAX;clearInterval(ti);ti=setInterval(function(){tl-=.1;if(tl<=0){tl=0;clearInterval(ti);pick(-1,null)}tick()},100);tick();
+}
+function tick(){var b=document.getElementById('tb'),x=document.getElementById('tx');if(b)b.style.width=Math.min(100,tl/TMAX*100)+'%';if(x)x.textContent='⏱️ '+fa(Math.ceil(tl))}
+function pick(k,b){
+ if(locked)return;locked=true;clearInterval(ti);var d=Q[i],all=app.querySelectorAll('.opt'),fb=document.getElementById('fb');
+ all.forEach(function(x){x.disabled=true;if(+x.dataset.k===d.a)x.classList.add('ok')});
+ document.getElementById('l1').disabled=true;document.getElementById('l2').disabled=true;
+ if(k===d.a){var g=100+Math.round(tl*8)+combo*30;score+=g;combo++;best=Math.max(best,combo);right++;res[i]=1;ok();fx(['🎉','⭐','✨','📱','💻','🔥'],22);fb.innerHTML='✅ آفرین، درست بود! +'+fa(g)+' امتیاز'+(combo>1?' | 🔥 کمبو '+fa(combo):'')+'<br>'+d.e}
+ else{combo=0;res[i]=0;wrong.push(i+1);no();document.getElementById('cd').classList.add('shake');if(b)b.classList.add('bad');fb.innerHTML=(k<0?'⏰ زمان تمام شد! ':'❌ اشتباه بود! ')+'<br>'+d.e}
+ document.getElementById('cb').textContent='🔥 کمبو '+fa(combo);
+ var nx=document.getElementById('nx');nx.classList.remove('hide');nx.textContent=i<Q.length-1?'سؤال بعد ←':'دیدن نتیجه 🏆';
+ nx.onclick=function(){i++;i<Q.length?show():end()};
+}
+function end(){
+ var bd=right>=18?['🏆','تعمیرکار حرفه‌ای','عالی! قطعه‌شناسی‌ات حرفه‌ای است! 🎉']:right>=14?['🥇','تکنسین ماهر','خیلی عالی! با کمی مرور، کامل می‌شوی.']:right>=10?['🥈','تکنسین در حال رشد','پیشرفت خوبی داشتی، چند مبحث را دوباره مرور کن!']:['🌱','هنرجوی تازه‌کار','چند مبحث را مرور کن و دوباره امتحان کن، می‌توانی!'];
+ var code=name+' | '+EX.n+' | '+fa(right)+' از '+fa(Q.length)+' | امتیاز '+fa(score)+(wrong.length?' | اشتباه: '+wrong.map(fa).join('، '):' | بدون اشتباه');
+ fx(['🎉','🏆','⭐','📱','✨'],40);ok();
+ app.innerHTML='<div class="card"><div class="big">'+bd[0]+'</div><h1>'+bd[1]+'</h1><p style="text-align:center;font-size:19px;line-height:2"><b>'+esc(name)+'</b><br>⭐ امتیاز: '+fa(score)+'<br>✅ درست: '+fa(right)+' از '+fa(Q.length)+'<br>🔥 بهترین کمبو: '+fa(best)+'<br>'+bd[2]+'</p></div><div class="card"><b>📩 این کد را برای معلمت بفرست:</b><textarea id="cd2" readonly></textarea><button class="go alt" id="cp" style="margin-top:10px">کپی کد 📋</button></div><button class="go" id="rp">انتخاب آزمون 🔁</button>';
+ document.getElementById('cd2').value=code;
+ document.getElementById('rp').onclick=start;
+ document.getElementById('cp').onclick=function(){var t=document.getElementById('cd2');t.select();var k=false;try{k=document.execCommand('copy')}catch(e){}try{navigator.clipboard.writeText(code);k=true}catch(e){}this.textContent=k?'کپی شد ✅':'متن را انتخاب و کپی کن'};
+}
+start();
+</script>
+</body>
+</html>
